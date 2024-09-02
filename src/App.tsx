@@ -1,11 +1,14 @@
-import SuggestionsPage from '../components/suggestions-page'
+import SuggestionsPage from './components/suggestions-page'
+import { RecipeContextProvider } from './components/suggestions'
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <SuggestionsPage></SuggestionsPage>
+      <RecipeContextProvider>
+        <SuggestionsPage />
+      </RecipeContextProvider>
     </>
   )
 }
