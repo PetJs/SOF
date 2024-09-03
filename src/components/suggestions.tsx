@@ -1,13 +1,25 @@
 import { useState, useEffect, createContext, ReactNode } from 'react';
 
-type Recipe = {
-  title: string;
-  ingredients: string;
-  servings: string;
-  instructions: string;
+type Ingredient = {
+  aisle: string;
+  amount: number;
+  id: number;
+  image: string;
+  name: string;
+  original: string;
+  unit: string;
 };
 
-interface RecipeContextProvider {
+type Recipe = {
+  id: number;
+  title: string;
+  image: string;
+  missedIngredients: Ingredient[];
+  usedIngredients: Ingredient[];
+  unusedIngredients: Ingredient[];
+};
+
+interface RecipeContextType {
   recipes: Recipe[];
   searchQuery: string;
   filteredRecipes: Recipe[];
@@ -15,78 +27,94 @@ interface RecipeContextProvider {
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-interface RecipeContextProps {
+interface RecipeContextProviderProps {
   children: ReactNode;
 }
 
-const API_URL = 'https://api.api-ninjas.com/v1/recipe?query=';
-const API_KEY = 'iGrtlj60oM1LfEaw7Xhic2F4ub83QiXABToq8Wmgf';
+const API_URL = 'https://api.spoonacular.com/recipes/complexSearch';
+const API_KEY = 'c81f930089604a68a1f703a8f90aa529';
 
-export const RecipeContext = createContext<RecipeContextProvider | null>(null);
+export const RecipeContext = createContext<RecipeContextType | null>(null);
 
-export const RecipeContextProvider = ({ children }: RecipeContextProps) => {
+export const RecipeContextProvider = ({ children }: RecipeContextProviderProps) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Fetch recipes from the API on initial render
-    const fetchRecipes = async (query: string): Promise<void> => {
-      try {
-        const response = await fetch(`${API_URL}${encodeURIComponent(query)}`, {
-          method: 'GET',
-          headers: {
-            'X-Api-Key': API_KEY,
-          },
-        });
+  // Function to fetch recipes from the API
+  const fetchRecipes = async (query: string = ''): Promise<void> => {
+    try {
+      const response = await fetch(`${API_URL}?query=${encodeURIComponent(query)}&apiKey=${API_KEY}`, {
+        method: 'GET',
+      });
 
-        if (response.ok) {
-          const data = await response.json();
-          setRecipes(data); // Set the recipes fetched from the API
-          setFilteredRecipes(data); // Initially, filtered recipes are the same as all recipes
-          setError(null); // Clear any previous errors
-        } else {
-          console.error('Error fetching recipes:', response.statusText);
-          setError(`Error: ${response.statusText}`);
-        }
-      } catch (error) {
-        console.error('Error fetching recipes:', error);
-        setError('Failed to fetch recipes. Please try again.');
+      if (!response.ok) {
+        throw new Error(response.statusText);
       }
-    };
 
-    fetchRecipes(''); // Fetch default recipes or a set with a meaningful query
+      const data = await response.json();
+      console.log('Fetched data:', data.results); // Check if data.results is populated
+
+      setRecipes(data.results || []); // Default to empty array if data.results is undefined
+      setFilteredRecipes(data.results || []);
+      setError(null);
+    } catch (error) {
+      console.error('Error fetching recipes:', error);
+      setError('Failed to fetch recipes. Please try again.');
+    }
+  };
+
+  // Initial fetch on component mount
+  useEffect(() => {
+    fetchRecipes(); // Fetch all recipes initially or with a default query
   }, []);
 
+  // Update filtered recipes when searchQuery or recipes change
   useEffect(() => {
     if (!searchQuery) {
       setFilteredRecipes(recipes); // Show all recipes when there's no search query
-      setError(null); // Clear error when there's no search query
+      setError(null);
     } else {
       const keywords = searchQuery.toLowerCase().split(',').map(keyword => keyword.trim());
 
-      if (keywords.length < 3) {
-        setError('You must provide at least 3 keywords.');
-        setFilteredRecipes([]); // Clear the filtered recipes
-      } else {
-        setError(null); // Clear the error if validation passes
-
-        const filtered = recipes.filter(recipe =>
-          keywords.every(keyword =>
-            recipe.title.toLowerCase().includes(keyword) ||
-            recipe.ingredients.toLowerCase().includes(keyword) ||
-            recipe.instructions.toLowerCase().includes(keyword)
-          )
+      const filtered = recipes.filter(recipe => {
+        const titleMatch = keywords.every(keyword =>
+          recipe.title.toLowerCase().includes(keyword)
         );
 
-        setFilteredRecipes(filtered);
+        const missedIngredientsMatch = recipe.missedIngredients && recipe.missedIngredients.length > 0
+          ? keywords.every(keyword =>
+              recipe.missedIngredients.some(ingredient =>
+                ingredient.name.toLowerCase().includes(keyword)
+              )
+            )
+          : false;
+
+        const usedIngredientsMatch = recipe.usedIngredients && recipe.usedIngredients.length > 0
+          ? keywords.every(keyword =>
+              recipe.usedIngredients.some(ingredient =>
+                ingredient.name.toLowerCase().includes(keyword)
+              )
+            )
+          : false;
+
+        return titleMatch || missedIngredientsMatch || usedIngredientsMatch;
+      });
+
+      if (filtered.length === 0) {
+        setError('No recipes match your search.');
+      } else {
+        setError(null);
       }
+
+      setFilteredRecipes(filtered);
     }
   }, [searchQuery, recipes]);
 
+  // Handle search input change
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value); // Update the search query state
+    setSearchQuery(event.target.value);
   };
 
   return (
