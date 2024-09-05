@@ -3,6 +3,9 @@ import HeaderImage from './images/HeaderImage.jpg'
 import Lawrence from './images/Lawrence.jpg'
 import Jessica from './images/Jessica.jpg'
 import { House, UserRound, ChefHat, Utensils, Facebook, Twitter, Instagram, Mail, FileText, Shield } from 'lucide-react';
+import SuggestionsPage from './components/suggestions-page';
+import { Link } from 'react-router-dom';
+
 
 
 export default function LandingPage() {
@@ -10,9 +13,21 @@ export default function LandingPage() {
     return(
         <>
              <div className='bg-[#f6c9b9]'>
-                <div className="Header bg-[#c54b1f] p-4 border border-white text-white flex gap-1">
-                    <Utensils />
-                    <h3 className="text-[20px] font-bold">SOF</h3>
+                <div className="Header bg-[#c54b1f] p-4 border border-white text-white flex justify-between gap-1">
+                    <div className='flex'>
+                        <Utensils />
+                        <h3 className="text-3xl  font-bold">SOF</h3>
+                    </div>
+                    
+                    <Link to="/suggestions">
+                        <h2 
+                            className="bg-[#964b00db] rounded-full text-white text-2xl font-bold pb-4 px-6 pt-2 text-center animate-bounce"
+                            style={{ animation: 'bounce 1s infinite' }}
+                        >
+                            Go to Recipe
+                        </h2>
+                    </Link>
+
                 </div>
                 <div className="container1 flex flex-row justify-center">
                     <div className="Texts flex flex-col pr-2">

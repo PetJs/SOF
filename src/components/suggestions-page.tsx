@@ -45,7 +45,7 @@ const SuggestionsPage = () => {
         >
           Search
         </button>
-      </div>
+      </div> 
       <p className="font-bold mb-4 text-slate-700">
         Try inputting more than one keyword in the search bar to get accurate results.
       </p>
