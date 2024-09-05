@@ -6,7 +6,13 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['YourCustomFont', 'system-ui', 'sans-serif'],
+        serif: ['YourSerifFont', 'serif'],
+        mono: ['YourMonoFont', 'monospace'],
+      },
+    },
   },
   plugins: [],
 }
