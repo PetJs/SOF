@@ -65,7 +65,7 @@ export default function LandingPage() {
                             <div className="flex items-start">
                                 <img className="w-24 h-24 mr-4 mt-7 rounded-full object-cover float-left" src="" alt="Peter"/>
                                 <p className="text-sm text-gray-800 flex-1 pt-8">
-                                    This is the description This is the description This is the description. This is the description This is the description, This is the description This is the description.
+                                    This is the description, This is the description This is the description. This is the description This is the description, This is the description This is the description.
                                 </p>        
                             </div>
                             <h3 className="person text-xl font-semibold text-center mt-4 ml-8">Peter</h3>
