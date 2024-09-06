@@ -22,7 +22,7 @@ const FoodCard: React.FC<FoodCardProps> = ({ title, image, missedIngredients, us
   console.log('Used Ingredients:', usedIngredients);
 
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="bg-white shadow-md h-[30rem] hover:scale-105 duration-300 rounded-lg overflow-hidden">
       <img src={image} alt={title} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h2 className="text-xl font-semibold">{title}</h2>

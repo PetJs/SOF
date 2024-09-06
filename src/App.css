@@ -36,6 +36,11 @@
 .footermobile {
   display: none;
 }
+
+.about{
+  clip-path: polygon(51% 7%, 71% 0, 86% 7%, 100% 0, 100% 0, 100% 100%, 0 100%, 0 0, 19% 7%, 33% 0);
+}
+
 .footer {
   display: block;
 }

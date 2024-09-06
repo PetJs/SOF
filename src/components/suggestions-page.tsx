@@ -52,7 +52,7 @@ const SuggestionsPage = () => {
         Try inputting more than one keyword in the search bar to get accurate results.
       </p>
       {error && <p className="text-red-500">{error}</p>} {/* Display error if there is any */}
-      <div className="flex flex-wrap gap-4 w-[70%]">
+      <div className="flex flex-wrap gap-3 justify-center w-[70%]">
         {loading ? (
           <>
             <LoadingCard />

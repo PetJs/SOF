@@ -10,16 +10,14 @@ export default function LandingPage() {
 
     return(
         <>
-            <div className='bg-[#f6c9b9]'>
-                <div className="Header bg-[#c54b1f] p-4 border border-white text-white flex justify-between">
-                    <div className=' flex gap-1'>
+            <div className=' bg-[#f6c9b9]'>
+                <div className="Header bg-[#c54b1f] p-4 text-white flex justify-between">
+                    <div className=' flex gap-1 items-center'>
                         <Utensils />
                         <h3 className="text-[20px] font-bold">SOF</h3>
                     </div>
-                    <div className="pageslink flex flex-row gap-6">
-                        <Link to="/"><p>Profile</p></Link>
-                        <Link to="/"><p>Home</p></Link>                       
-                        <Link to="/suggestions"><p>Recipe</p></Link>
+                    <div className="pageslink flex flex-row gap-6">                  
+                        <Link className='font-bold bg-white rounded-3xl text-[#c54b1f] p-2' to="/suggestions"><p>Get Started</p></Link>
                     </div>                    
                     <div className="socialMedia flex flex-row gap-6">
                         <a href="https://facebook.com" className="mx-2">
@@ -56,6 +54,50 @@ export default function LandingPage() {
                     <div className="headingimage py-[80px]">
                         <img className='img rounded-full' src={HeaderImage} alt="An Image" />
                     </div>
+                </div>
+
+                <div className='bg-white pt-32 about'>
+                <div className="max-w-4xl mx-auto p-8">
+        <h1 className="text-4xl font-extrabold mb-6 text-center text-[#c54b1f]">
+            Understanding the Global Food Waste Crisis
+        </h1>
+
+        <p className="text-lg mb-4">
+            Food waste is a critical issue that impacts every corner of the globe, with profound implications for the environment, economy, and society. Despite the fact that nearly 800 million people around the world are undernourished, a staggering one-third of all food produced is lost or wasted. This disconnect between food production and consumption reveals a severe inefficiency in our global food systems.
+        </p>
+
+        <h2 className="text-2xl font-bold mt-6 mb-4 text-black">
+            Environmental Impact
+        </h2>
+        <p className="text-lg mb-4">
+            The environmental toll of food waste is immense. When food is thrown away, it not only represents wasted resources but also contributes significantly to greenhouse gas emissions. Decomposing food in landfills produces methane, a potent greenhouse gas that exacerbates climate change. Additionally, the resources used to grow, process, and transport this food—such as water, energy, and land—are also squandered. The production of food that ultimately ends up as waste contributes to deforestation, habitat destruction, and biodiversity loss.
+        </p>
+
+        <h2 className="text-2xl font-bold mt-6 mb-4 text-black">
+            Economic Costs
+        </h2>
+        <p className="text-lg mb-4">
+            The economic impact of food waste is equally alarming. Globally, the value of food wasted annually amounts to nearly $1 trillion. This staggering figure includes not just the cost of the food itself but also the associated costs of labor, packaging, transportation, and disposal. For households, businesses, and governments alike, food waste translates into lost money and inefficient use of resources. Reducing food waste could result in substantial savings and a more efficient allocation of resources.
+        </p>
+
+        <h2 className="text-2xl font-bold mt-6 mb-4 text-black">
+            Social and Ethical Concerns
+        </h2>
+        <p className="text-lg mb-4">
+            From a social perspective, food waste represents a profound ethical issue. The paradox of food scarcity in the face of such vast quantities of wasted food highlights deep inequalities in our food systems. While millions suffer from hunger and malnutrition, perfectly edible food is discarded, reflecting a disconnect between food availability and food access. Addressing food waste could significantly improve food security and support those in need.
+        </p>
+
+        <h2 className="text-2xl font-bold mt-6 mb-4 text-black">
+            The Path Forward
+        </h2>
+        <p className="text-lg mb-4">
+            Tackling the global food waste crisis requires a multifaceted approach that involves individuals, businesses, and governments. Innovative solutions and technologies can play a crucial role in reducing waste, from improving food storage and distribution to developing apps that help consumers manage their food better. Education and awareness are key components in encouraging better practices at every level of the food supply chain.
+        </p>
+
+        <p className="text-lg">
+            By understanding the scale and impact of food waste, we can collectively work towards more sustainable food systems and contribute to a healthier planet. It’s a challenge that demands our attention and action, but with concerted effort, we can make meaningful progress in reducing waste and ensuring that food reaches those who need it most.
+        </p>
+    </div>
                 </div>
 
                 <div className='text-center pb-[100px] pt-8 bg-white'>
@@ -101,7 +143,7 @@ export default function LandingPage() {
                     </div>
                 </div>
 
-                <div className="footer bg-[hsl(16,73%,45%)] p-8 border border-white text-white text-center">
+                <div className="footer bg-[hsl(16,73%,45%)] p-8  text-white text-center">
                     <div className='link1 flex justify-between'>
                         <div className="social-media mb-4 flex place-self-center gap-6">
                             <a href="https://facebook.com" className="mx-2">
@@ -140,7 +182,7 @@ export default function LandingPage() {
                     </div>
                 </div>
 
-                <div className="footermobile bg-[#c54b1f] p-4 border border-white h-[60px] fixed bottom-0 left-0 right-0 text-white">
+                <div className="footermobile bg-[#c54b1f] p-4  h-[60px] fixed bottom-0 left-0 right-0 text-white">
                     <Link to="/">
                         <UserRound className='w-9 h-9'/>
                     </Link>                    
