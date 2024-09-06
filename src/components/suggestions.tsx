@@ -32,7 +32,7 @@ interface RecipeContextProviderProps {
 }
 
 const API_URL = 'https://api.spoonacular.com/recipes/findByIngredients';
-const API_KEY = 'c81f930089604a68a1f703a8f90aa529';
+const API_KEY = 'f728eec052034105936a1d371fe61e69';
 
 export const RecipeContext = createContext<RecipeContextType | null>(null);
 

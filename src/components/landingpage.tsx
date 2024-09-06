@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import HeaderImage from '../images/HeaderImage.jpg'
 import Lawrence from '../images/Lawrence.jpg'
 import Jessica from '../images/Jessica.jpg'
+import fari from '../images/fari.jpeg'
+import peter from '../images/peter.jpeg'
 import { House, UserRound, ChefHat, Utensils, Facebook, Twitter, Instagram, Mail, FileText, Shield } from 'lucide-react';
 
 
@@ -105,9 +107,9 @@ export default function LandingPage() {
                     <div className='founders flex flex-wrap gap-16 justify-center pt-10'>
                         <div className="persons bg-[#f6c9b9] rounded-md p-4 flex flex-col items-start max-w-sm border border-[#c54b1f]">
                             <div className="flex items-start">
-                                <img className="w-24 h-24 mr-4 mt-7 rounded-full object-cover float-left" src="" alt="Peter"/>
+                                <img className="w-24 h-24 mr-4 mt-7 rounded-full object-cover float-left" src={peter} alt="Peter"/>
                                 <p className="text-sm text-gray-800 flex-1 pt-8">
-                                    This is the description, This is the description This is the description. This is the description This is the description, This is the description This is the description.
+                                    He is the Project head and supervisor. He oversaw all the  project activities and ensured that the project was completed on time.
                                 </p>        
                             </div>
                             <h3 className="person text-xl font-semibold text-center mt-4 ml-8">Peter</h3>
@@ -115,9 +117,10 @@ export default function LandingPage() {
 
                         <div className='persons bg-[#f6c9b9] rounded-md p-4 flex flex-col items-start max-w-sm border border-[#c54b1f]'>
                             <div className="flex items-start">
-                                <img className="w-24 h-24 mr-4 mt-7 rounded-full object-cover float-left" src="" alt="Fari"/>
+                                <img className="w-24 h-24 mr-4 mt-7 rounded-full object-cover float-left" src={fari} alt="Fari"/>
                                 <p className="text-sm text-gray-800 flex-1 pt-8">
-                                    This is the description This is the description This is the description. This is the description This is the description, This is the description This is the description.
+                                    She worked on the backend. She manages the server-side of the project, focusing on creating reliable and scalable systems. Her expertise ensures our application to run smoothly.
+
                                 </p>        
                             </div>
                             <h3 className="person text-xl font-semibold text-center mt-4 ml-8">Fari</h3>
@@ -126,7 +129,7 @@ export default function LandingPage() {
                             <div className="flex items-start">
                                 <img className="w-24 h-24 mr-4 mt-7 rounded-full object-cover float-left" src={Jessica} alt="Jessica"/>
                                 <p className="text-sm text-gray-800 flex-1 pt-8">
-                                    This is the description This is the description This is the description. This is the description This is the description, This is the description This is the description.
+                                    Jessica combined her talent in design with technical skills to craft a stunning and user-friendy interface while ensuring the deign elements translates into functional code.
                                 </p>        
                             </div>
                             <h3 className="person text-xl font-semibold text-center mt-4 ml-5">Jessica</h3>
@@ -135,8 +138,8 @@ export default function LandingPage() {
                             <div className="flex items-start">
                                 <img className="w-24 h-24 mr-4 mt-7 rounded-full object-cover float-left" src={Lawrence} alt="Lawrence"/>
                                 <p className="text-sm text-gray-800 flex-1 pt-8">
-                                    This is the description This is the description This is the description. This is the description This is the description, This is the description This is the description.
-                                </p>        
+                                    Larence brings creativity into the project. He focused on building smooth and user-friendly interfaces tha enhanced the overall performance.
+                                </p>       
                             </div>
                             <h3 className="person text-xl font-semibold text-center mt-4 ml-1">Lawrence</h3>
                         </div>
