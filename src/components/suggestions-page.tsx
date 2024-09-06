@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from 'react';
 import FoodCard from './food-card'; // Assuming FoodCard is a component for displaying a single recipe
 import LoadingCard from './loading-card'; // Assuming LoadingCard is a component for displaying a loading state
 import { RecipeContext } from './suggestions'; // Import the context
+import { Link } from 'react-router-dom';
+
 
 const SuggestionsPage = () => {
   const context = useContext(RecipeContext);
@@ -24,7 +26,7 @@ const SuggestionsPage = () => {
   }, [filteredRecipes, searchQuery]);
 
   return (
-    <div className="flex flex-col justify-start items-center pt-40">
+    <div className="flex flex-col justify-start items-center pt-20">
       <h1 className="text-5xl text-center m-8 font-extrabold">
         Don't know what to cook? Don't worry, we've got you
       </h1>
@@ -74,6 +76,9 @@ const SuggestionsPage = () => {
             <p className="text-center text-gray-500">No recipes found. Try adjusting your search.</p>
           )
         )}
+      </div>
+      <div className='py-10 text-red-500 font-semibold text-[20px]'>
+        <Link to="/">Back To Landing Page</Link>
       </div>
     </div>
   );
