@@ -1,4 +1,20 @@
-
+.pageslink {
+  display: block;
+}
+.socialMedia {
+  display: none !important;
+}
+.founderheading {
+  font-family: "Playwrite IS", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.sof {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 .headingtext {
   font-size: 150px;
 }
@@ -23,6 +39,12 @@
 .footer {
   display: block;
 }
+.persons p {
+  text-align: justify;
+}
+.link1 {
+  padding: 0 100px;
+}
 
 
 
@@ -41,6 +63,9 @@
 @media (max-width: 900px) {
   .headingimage {
     width: 450px;    
+  }
+  .link1 {
+    padding: 0;
   }
 }
 
@@ -111,6 +136,14 @@
 }
 
 @media (max-width: 540px) {
+  .pageslink {
+    display: none !important;
+  }
+  .socialMedia {
+    display: flex !important;
+    justify-content: center;
+    gap: 6px;
+  }
   .footer {
     display: none;
   }
@@ -121,5 +154,5 @@
   }
 body{
     background-color: #f1f5f9;
-
+  }
 }
