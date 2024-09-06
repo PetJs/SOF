@@ -15,6 +15,15 @@ const SuggestionsPage = () => {
 
   const { filteredRecipes, handleSearch, searchQuery, error } = context;
   const [loading, setLoading] = useState(true);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+
+  const handleCardClick = (recipe) => {
+    setSelectedRecipe(recipe); // Set the clicked recipe to state
+  };
+
+  const handleClose = () => {
+    setSelectedRecipe(null); // Close the modal by setting state to null
+  };
 
   useEffect(() => {
     // Set loading state based on the filteredRecipes and searchQuery
@@ -69,6 +78,7 @@ const SuggestionsPage = () => {
                   image={recipe.image}
                   missedIngredients={recipe.missedIngredients || []}
                   usedIngredients={recipe.usedIngredients || []}
+                  onclick={() => handleCardClick(recipe)}
                 />
               </div>
             ))
@@ -77,6 +87,42 @@ const SuggestionsPage = () => {
           )
         )}
       </div>
+      {selectedRecipe && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-2/3 lg:w-1/2 relative">
+            <button
+              className="absolute top-3 right-3 text-red-500 hover:text-red-700"
+              onClick={handleClose}
+            >
+              ✕
+            </button>
+            <img
+              src={selectedRecipe.image}
+              alt={selectedRecipe.title}
+              className="rounded-lg w-full h-60 object-cover mb-4"
+            />
+            <h2 className="text-2xl font-bold mb-2">{selectedRecipe.title}</h2>
+
+            <h3 className="text-xl font-semibold mt-4">Used Ingredients</h3>
+            <ul className="list-disc list-inside mb-4">
+              {selectedRecipe.usedIngredients.map((ingredient, index) => (
+                <li key={index}>
+                  {ingredient.amount} {ingredient.unit} {ingredient.name}
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="text-xl font-semibold mt-4">Missed Ingredients</h3>
+            <ul className="list-disc list-inside">
+              {selectedRecipe.missedIngredients.map((ingredient, index) => (
+                <li key={index}>
+                  {ingredient.amount} {ingredient.unit} {ingredient.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
       <div className='py-10 text-red-500 font-semibold text-[20px]'>
         <Link to="/">Back To Landing Page</Link>
       </div>
