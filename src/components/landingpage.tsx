@@ -46,7 +46,7 @@ export default function LandingPage() {
                         <div className="headingimage1">
                             <img className='img rounded-full' src={HeaderImage} alt="An Image" /> 
                         </div>
-                        <p className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 leading-snug py-4">
+                        <p className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 py-4">
                             Welcome to <span className="text-primary-500 font-extrabold">SOF</span>, your ultimate kitchen companion! 
                             Get ready to explore new culinary adventures with 
                             <span className="text-primary-500 font-extrabold"> SOF</span>—where creativity in the kitchen 
