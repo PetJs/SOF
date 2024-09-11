@@ -14,7 +14,7 @@ export default function LandingPage() {
         <>
             <div className=' bg-[#f6c9b9]'>
                 <div className="Header bg-[#c54b1f] p-4 text-white flex justify-between">
-                    <div className=' flex gap-1 items-center'>
+                    <div className='flex gap-1 items-center'>
                         <Utensils />
                         <h3 className="text-[20px] font-bold">SOF</h3>
                     </div>
