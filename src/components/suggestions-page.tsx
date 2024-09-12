@@ -221,8 +221,9 @@ const SuggestionsPage = () => {
             </div>
           )}
 
-          <div className="py-10 text-red-500 font-semibold text-[20px]">
-            <Link to="/">Back To Landing Page</Link>
+          <div className="py-10 text-red-500 font-semibold text-[20px] flex space-x-16">
+            <Link to="/" className='hover:underline'>Home Page</Link>
+            <Link to={""} className='hover:underline'>My Profile</Link>
           </div>
         </>
       )}
