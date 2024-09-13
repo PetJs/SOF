@@ -163,9 +163,6 @@
     gap: 70px;
     justify-content: center;
   }
-  body{
-    background-color: #f1f5f9;
-  }
   .authentication {
     width: 90%;
   }

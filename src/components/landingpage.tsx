@@ -12,14 +12,14 @@ export default function LandingPage() {
 
     return(
         <>
-            <div className=' bg-[#f6c9b9]'>
+            <div className=' bg-gradient-to-tr from-[#d19883] to-[#f6c9b9]'>
                 <div className="Header bg-[#c54b1f] p-4 text-white flex justify-between">
                     <div className='flex gap-1 items-center'>
                         <Utensils />
                         <h3 className="text-[20px] font-bold">SOF</h3>
                     </div>
                     <div className="pageslink flex flex-row gap-6">                  
-                        <Link className='font-bold bg-white rounded-3xl text-[#c54b1f] p-2' to="/suggestions"><p>Get Started</p></Link>
+                        <Link className='font-bold bg-white rounded text-[#c54b1f] p-2' to="/"><p>Get Started</p></Link>
                     </div>                    
                     <div className="socialMedia flex flex-row gap-6">
                         <a href="https://facebook.com" className="mx-2">
@@ -44,7 +44,7 @@ export default function LandingPage() {
                             </div>
                         </div>
                         <div className="headingimage1">
-                            <img className='img rounded-full' src={HeaderImage} alt="An Image" /> 
+                            <img className='img ' src={HeaderImage} alt="An Image" /> 
                         </div>
                         <p className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 py-4">
                             Welcome to <span className="text-primary-500 font-extrabold">SOF</span>, your ultimate kitchen companion! 
@@ -54,7 +54,7 @@ export default function LandingPage() {
                         </p>
                     </div>
                     <div className="headingimage py-[80px]">
-                        <img className='img rounded-full' src={HeaderImage} alt="An Image" />
+                        <img className='img rounded-lg' src={HeaderImage} alt="An Image" />
                     </div>
                 </div>
 
@@ -192,7 +192,7 @@ export default function LandingPage() {
                     <Link to="/">
                         <House className='w-9 h-9'/>
                     </Link>
-                    <Link to="/suggestions">
+                    <Link to="/">
                         <ChefHat className='w-9 h-9'/>
                     </Link>                   
                 </div>

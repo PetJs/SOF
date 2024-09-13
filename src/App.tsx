@@ -12,8 +12,8 @@ function App() {
       <Router>
         <RecipeContextProvider>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/suggestions" element={<SuggestionsPage />} />
+            <Route path="/" element={<SuggestionsPage />} />
+            <Route path="/LandingPage" element={<LandingPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </RecipeContextProvider>

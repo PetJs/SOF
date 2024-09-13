@@ -45,10 +45,7 @@ const ProfilePage = () => {
 
       <div className='flex gap-16 text-red-500 my-10 font-semibold text-[20px]'>
         <Link to="/" className="hover:underline">
-          Back to Home
-        </Link>
-        <Link to="/suggestions" className="hover:underline">
-          Back to Recipe
+          Go Back
         </Link>
       </div>
     </div>

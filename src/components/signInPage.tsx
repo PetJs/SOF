@@ -3,7 +3,6 @@ import { createUserWithEmailAndPassword, signInWithPopup, onAuthStateChanged } f
 import { provider, auth } from "../config/firebase";
 import { Utensils } from 'lucide-react';
 
-
 interface AuthProps {
   onSignIn: () => void;
 }
@@ -66,7 +65,7 @@ export const Auth: React.FC<AuthProps> = ({ onSignIn }) => {
   }
 
   return (
-    <div className="authentication bg-[#e0693d] rounded-3xl">
+    <div className="authentication  bg-gradient-to-r from-[#d45121] to-[#e0693d] rounded-3xl">
       <div className="logo flex gap-1 items-center text-white justify-center py-8">
         <Utensils size={'50px'}/>
         <h3 className="text-[50px] font-bold">SOF</h3>
@@ -78,7 +77,7 @@ export const Auth: React.FC<AuthProps> = ({ onSignIn }) => {
             placeholder="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className='text-black rounded-full py-[10px] border-white pl-6'
+            className='text-black rounded py-[10px] border-white pl-6'
             required
           />
           <input
@@ -86,14 +85,14 @@ export const Auth: React.FC<AuthProps> = ({ onSignIn }) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='text-black rounded-full py-[10px] border-white pl-6'
+            className='text-black rounded py-[10px] border-white pl-6'
             required
             minLength={8}
           />
           <button
             onClick={handleEmailSignIn}
             disabled={!validateEmail(email) || password.length < 8}
-            className='rounded-full py-[8px] bg-[#72e37e] text-white font-semibold hover:bg-white hover:text-[#3c2c1e]'
+            className='rounded py-[8px] bg-[#72e37e]  duration-300 text-white font-semibold hover:bg-white hover:text-[#3c2c1e]'
           >
             SIGN IN
           </button>
@@ -104,9 +103,10 @@ export const Auth: React.FC<AuthProps> = ({ onSignIn }) => {
       <div className="google my-16 text-white flex flex-col items-center">
         <p className="text-center font-semibold text-[20px]">Sign in with other account</p>
         <button onClick={signInWithGoogle}
-          className="mt-6 rounded-md py-[8px] border border-white w-[80%] hover:bg-white hover:text-[#3c2c1e]"
+          className="mt-6 flex items-center justify-around px-4 w-fit gap-4 duration-300 rounded-md py-[8px] border border-white w-[80%] hover:bg-white hover:text-[#3c2c1e]"
         >
-            Google
+          <img className="size-10" src="https://cdn4.iconfinder.com/data/icons/logos-brands-7/512/google_logo-google_icongoogle-512.png" />
+            <span className="font-medium">Sign in With Google</span>
         </button>
       </div>
 
