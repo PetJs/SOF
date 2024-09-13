@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../App";
 
-interface SignOutProps{
-    onSignOut: ()=> void;
-}
 
-const SignOut: React.FC<SignOutProps> = ({ onSignOut }) => {
+const SignOut: React.FC= () => {
     const navigate = useNavigate();
     const [showConfirmation, setShowConfirmation] = useState(false);
+    
+    // Get AuthContext value and handle null case
+    const authContext = useContext(AuthContext);
+    if (!authContext) {
+        throw new Error('AuthContext must be used within an AuthProvider');
+    }
+
+    const { setIsAuthenticated } = authContext;
 
     const handleSignOut = () =>{
         auth.signOut().then(() => {
-            onSignOut()
-            navigate('/')
-
+            setIsAuthenticated(false); 
+            navigate('/'); 
+        }).catch((error) => {
+            console.error("Error signing out:", error);
         });
     };
 

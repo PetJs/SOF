@@ -4,6 +4,7 @@ import LoadingCard from './loading-card';
 import { Link } from 'react-router-dom';
 import { Auth } from './signInPage';
 import { Heart } from 'lucide-react';
+import SignOut  from './SignOutButton';
 
 // Define Ingredient type
 interface Ingredient {
@@ -239,7 +240,7 @@ const SuggestionsPage = () => {
           <div className="py-10 text-red-500 font-semibold text-[20px] flex space-x-16">
             <Link to="/" className='hover:underline'>Home Page</Link>
             <Link to={"/profile"} className='hover:underline'>My Profile</Link>
-            <Link to="" className='hover:underline'>Sign Out</Link>
+            <SignOut/>
           </div>
         </>
       )}

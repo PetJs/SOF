@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { RecipeContext } from './suggestions';
 import { Link } from 'react-router-dom';
 import SignOut from './SignOutButton';
@@ -9,10 +9,6 @@ const ProfilePage = () => {
   const favorites = context?.favorites || [];
   const toggleFavorite = context?.toggleFavorite;
 
-  const handleSignOut = () => {
-    console.log("User signed out");
-    
-  };
 
   return (
     <div className="favdiv flex flex-col items-center pt-20">
@@ -56,7 +52,7 @@ const ProfilePage = () => {
         <Link to="/suggestions" className="hover:underline">
           Back to Recipe
         </Link>
-        <SignOut onSignOut={handleSignOut} />
+        <SignOut/>
       </div>
     </div>
   );

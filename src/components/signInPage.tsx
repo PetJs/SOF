@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { provider, auth } from "../config/firebase";
 import { Utensils } from 'lucide-react';
-
+import { useNavigate } from "react-router-dom";
 
 interface AuthProps {
   onSignIn: () => void;
@@ -14,12 +14,14 @@ export const Auth: React.FC<AuthProps> = ({ onSignIn }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true); // Loading state to track whether the authentication status is being checked
+  const navigate = useNavigate();
 
   // Check if the user is already signed in when the component loads
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => { //listens for cahnges in authentication state
       if (user) {
         onSignIn(); // User is signed in, update state
+        navigate('/suggestions')
       }
       setIsLoading(false); // Reset the loading to false
     });
