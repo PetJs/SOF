@@ -186,7 +186,7 @@ export default function LandingPage() {
                 </div>
 
                 <div className="footermobile bg-[#c54b1f] p-4  h-[60px] fixed bottom-0 left-0 right-0 text-white">
-                    <Link to="/">
+                    <Link to="/profile">
                         <UserRound className='w-9 h-9'/>
                     </Link>                    
                     <Link to="/">

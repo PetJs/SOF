@@ -25,6 +25,8 @@ interface RecipeContextType {
   filteredRecipes: Recipe[];
   error: string | null;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  favorites: Recipe[];
+  toggleFavorite: (recipe: Recipe) => void;
 }
 
 interface RecipeContextProviderProps {
@@ -41,6 +43,24 @@ export const RecipeContextProvider = ({ children }: RecipeContextProviderProps) 
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<Recipe[]>(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
+
+  //function to toggle a recipe as a favorite
+  const toggleFavorite = (recipe: Recipe) => {
+    setFavorites((prevFavorites) => {
+      const isFavorited = prevFavorites.some((fav) => fav.id === recipe.id);
+      const updatedFavorites = isFavorited
+        ? prevFavorites.filter((fav) => fav.id !== recipe.id)
+        : [...prevFavorites, recipe];
+
+      // Save updated favorites to localStorage
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      return updatedFavorites;
+    });
+  };
 
   // Function to fetch recipes from the API based on ingredients
   const fetchRecipes = async (ingredients: string = '', number: number = 10): Promise<void> => {
@@ -51,6 +71,9 @@ export const RecipeContextProvider = ({ children }: RecipeContextProviderProps) 
       );
   
       if (!response.ok) {
+        if (response.status === 403) {
+          throw new Error('API limit reached. Please try again later.');
+        }
         throw new Error(response.statusText);
       }
   
@@ -79,8 +102,9 @@ export const RecipeContextProvider = ({ children }: RecipeContextProviderProps) 
   };
 
   return (
-    <RecipeContext.Provider value={{ recipes, searchQuery, filteredRecipes, error, handleSearch }}>
+    <RecipeContext.Provider value={{ recipes, searchQuery, filteredRecipes, error, handleSearch, favorites, toggleFavorite }}>
       {children}
     </RecipeContext.Provider>
   );
 };
+ 
