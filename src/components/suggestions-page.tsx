@@ -3,6 +3,7 @@ import { RecipeContext } from './suggestions';
 import LoadingCard from './loading-card';
 import { Link } from 'react-router-dom';
 import { Auth } from './signInPage';
+import { Heart } from 'lucide-react';
 
 // Define Ingredient type
 interface Ingredient {
@@ -29,6 +30,7 @@ interface Recipe {
   image: string;
   missedIngredients: APIIngredient[];
   usedIngredients: APIIngredient[];
+  unusedIngredients: APIIngredient[];
 }
 
 // Map APIIngredient to the simpler Ingredient type used by the component
@@ -46,13 +48,13 @@ const FoodCard: React.FC<{
   missedIngredients: Ingredient[];
   usedIngredients: Ingredient[];
   onclick: () => void;
+  recipe: Recipe;
 }> = ({ title, image, missedIngredients, usedIngredients, onclick }) => {
   return (
     <div onClick={onclick} className="bg-white shadow-md h-[30rem] hover:scale-105 duration-300 rounded-lg overflow-hidden">
       <img src={image} alt={title} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h2 className="text-xl font-semibold">{title}</h2>
-
         <div>
           <h3 className="text-lg font-medium">Missed Ingredients</h3>
           {missedIngredients.length > 0 ? (
@@ -87,13 +89,14 @@ const FoodCard: React.FC<{
   );
 };
 
-
 // SuggestionsPage component
 const SuggestionsPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const { favorites, toggleFavorite } = useContext(RecipeContext) || {};
 
   const handleSignIn = () => {
     setIsAuthenticated(true);
@@ -179,6 +182,7 @@ const SuggestionsPage = () => {
                     missedIngredients={mapIngredients(recipe.missedIngredients || [])}
                     usedIngredients={mapIngredients(recipe.usedIngredients || [])}
                     onclick={() => handleCardClick(recipe)}
+                    recipe={recipe}
                   />
                 </div>
               ))
@@ -190,7 +194,7 @@ const SuggestionsPage = () => {
           {selectedRecipe && (
             <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
               <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-2/3 lg:w-1/2 relative">
-                <button className="absolute top-3 right-3 text-red-500 hover:text-red-700" onClick={handleClose}>
+                <button className="absolute top-0 right-0 rounded-md p-1 text-red-500 hover:text-white hover:bg-red-600" onClick={handleClose}>
                   ✕
                 </button>
                 <img
@@ -217,13 +221,24 @@ const SuggestionsPage = () => {
                     </li>
                   ))}
                 </ul>
+
+                <button 
+                  onClick={() => {
+                    if (toggleFavorite && selectedRecipe) { // Ensure it's defined before calling
+                      toggleFavorite(selectedRecipe);
+                    }
+                  }}
+                  className={`py-1 px-2 mt-6 rounded-md border border-black ${favorites && favorites.some((fav) => fav?.id === selectedRecipe?.id) ? 'bg-red-500 text-white border border-red-500' : 'bg-gray-500'}`}
+                >
+                  <Heart/>
+                </button>
               </div>
             </div>
           )}
 
           <div className="py-10 text-red-500 font-semibold text-[20px] flex space-x-16">
             <Link to="/" className='hover:underline'>Home Page</Link>
-            <Link to={""} className='hover:underline'>My Profile</Link>
+            <Link to={"/profile"} className='hover:underline'>My Profile</Link>
           </div>
         </>
       )}

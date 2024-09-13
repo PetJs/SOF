@@ -25,6 +25,8 @@ interface RecipeContextType {
   filteredRecipes: Recipe[];
   error: string | null;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  favorites: Recipe[];
+  toggleFavorite: (recipe: Recipe) => void;
 }
 
 interface RecipeContextProviderProps {
@@ -32,7 +34,7 @@ interface RecipeContextProviderProps {
 }
 
 const API_URL = 'https://api.spoonacular.com/recipes/findByIngredients';
-const API_KEY = 'f728eec052034105936a1d371fe61e69';
+const API_KEY = 'c81f930089604a68a1f703a8f90aa529';
 
 export const RecipeContext = createContext<RecipeContextType | null>(null);
 
@@ -41,22 +43,45 @@ export const RecipeContextProvider = ({ children }: RecipeContextProviderProps) 
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<Recipe[]>(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
+
+  // Function to toggle a recipe as a favorite
+  const toggleFavorite = (recipe: Recipe) => {
+    if (!recipe) return; // Safeguard against null recipe
+
+    setFavorites((prevFavorites) => {
+      const isFavorited = prevFavorites.some((fav) => fav?.id === recipe?.id);
+      const updatedFavorites = isFavorited
+        ? prevFavorites.filter((fav) => fav?.id !== recipe?.id)
+        : [...prevFavorites, recipe];
+
+      // Save updated favorites to localStorage
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      return updatedFavorites;
+    });
+  };
 
   // Function to fetch recipes from the API based on ingredients
   const fetchRecipes = async (ingredients: string = '', number: number = 10): Promise<void> => {
     try {
       const response = await fetch(
-        `${API_URL}?ingredients=${encodeURIComponent(ingredients)}&number=${number}&apiKey=${API_KEY}`, 
+        `${API_URL}?ingredients=${encodeURIComponent(ingredients)}&number=${number}&apiKey=${API_KEY}`,
         { method: 'GET' }
       );
-  
+
       if (!response.ok) {
+        if (response.status === 403) {
+          throw new Error('API limit reached. Please try again later.');
+        }
         throw new Error(response.statusText);
       }
-  
+
       const data = await response.json();
       console.log('Fetched data:', data); // Check the structure of fetched data
-  
+
       setRecipes(data || []); // Update state with fetched recipe data
       setFilteredRecipes(data || []);
       setError(null);
@@ -79,7 +104,7 @@ export const RecipeContextProvider = ({ children }: RecipeContextProviderProps) 
   };
 
   return (
-    <RecipeContext.Provider value={{ recipes, searchQuery, filteredRecipes, error, handleSearch }}>
+    <RecipeContext.Provider value={{ recipes, searchQuery, filteredRecipes, error, handleSearch, favorites, toggleFavorite }}>
       {children}
     </RecipeContext.Provider>
   );
