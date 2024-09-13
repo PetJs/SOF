@@ -30,6 +30,7 @@ interface Recipe {
   image: string;
   missedIngredients: APIIngredient[];
   usedIngredients: APIIngredient[];
+  unusedIngredients: APIIngredient[];
 }
 
 // Map APIIngredient to the simpler Ingredient type used by the component
@@ -87,7 +88,6 @@ const FoodCard: React.FC<{
     </div>
   );
 };
-
 
 // SuggestionsPage component
 const SuggestionsPage = () => {
@@ -224,11 +224,11 @@ const SuggestionsPage = () => {
 
                 <button 
                   onClick={() => {
-                    if (toggleFavorite) { // Ensure it's defined before calling
+                    if (toggleFavorite && selectedRecipe) { // Ensure it's defined before calling
                       toggleFavorite(selectedRecipe);
                     }
                   }}
-                  className={`py-1 px-2 mt-6 rounded-md border border-black ${favorites?.some((fav) => fav.id === selectedRecipe.id) ? 'bg-red-500 text-white border border-red-500' : 'bg-gray-500'}`}
+                  className={`py-1 px-2 mt-6 rounded-md border border-black ${favorites && favorites.some((fav) => fav?.id === selectedRecipe?.id) ? 'bg-red-500 text-white border border-red-500' : 'bg-gray-500'}`}
                 >
                   <Heart/>
                 </button>
@@ -247,4 +247,3 @@ const SuggestionsPage = () => {
 };
 
 export default SuggestionsPage;
-
