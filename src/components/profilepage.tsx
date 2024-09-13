@@ -1,12 +1,14 @@
 import { useContext } from 'react';
 import { RecipeContext } from './suggestions';
 import { Link } from 'react-router-dom';
+import SignOut from './SignOutButton';
 
 const ProfilePage = () => {
   // Use optional chaining to safely access context values
   const context = useContext(RecipeContext);
   const favorites = context?.favorites || [];
   const toggleFavorite = context?.toggleFavorite;
+
 
   return (
     <div className="favdiv flex flex-col items-center pt-20">
@@ -50,6 +52,7 @@ const ProfilePage = () => {
         <Link to="/suggestions" className="hover:underline">
           Back to Recipe
         </Link>
+        <SignOut/>
       </div>
     </div>
   );
