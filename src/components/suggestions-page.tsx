@@ -237,9 +237,9 @@ const SuggestionsPage = () => {
             </div>
           )}
 
-          <div className="py-10 text-red-500 font-semibold text-[20px] flex space-x-16">
-            <Link to="/" className='hover:underline'>Home Page</Link>
-            <Link to={"/profile"} className='hover:underline'>My Profile</Link>
+          <div className="py-10 text-red-500 font-semibold text-[16px] flex space-x-8">
+            <Link to="/" className=' bg-[#c54b1f] rounded-full text-white font-semibold px-6 py-2'>Home Page</Link>
+            <Link to={"/profile"} className=' bg-[#c54b1f] rounded-full text-white font-semibold px-6 py-2'>My Profile</Link>
             <SignOut/>
           </div>
         </>

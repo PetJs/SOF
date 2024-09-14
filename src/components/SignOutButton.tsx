@@ -29,19 +29,19 @@ const SignOut: React.FC= () => {
         <div>
             <button 
                 onClick={() => setShowConfirmation(true)}
-                className="bg-[#c54b1f] rounded-full text-lg text-white font-semibold px-10 py-4"
+                className="bg-[#c54b1f] rounded-full text-white font-semibold px-6 py-2"
             >
                 Sign Out
             </button>
 
             {showConfirmation && (
-                <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+                <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white rounded-lg p-8">
                         <p className="text-lg mb-4">Are you sure you want to sign out?</p>
                         <div className="flex justify-center space-x-4">
                             <button
                                 onClick={handleSignOut}
-                                className="rounded-full py-[6px] px-[16px] bg-[#ff5252] text-white font-semibold hover:bg-white hover:[#ff5252]"
+                                className="rounded-full py-[6px] px-[16px] bg-[#ff5252] text-white font-semibold hover:bg-white hover:text-[#3c2c1e]"
 
                             >
                                 Yes
